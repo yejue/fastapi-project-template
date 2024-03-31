@@ -8,7 +8,7 @@ class NoteService:
     """笔记表操作类"""
 
     @staticmethod
-    def create_note(db: Session, note: schemas.NoteSchema, user_id: int):
+    def create_note(db: Session, note: schemas.NoteCreateSchema, user_id: int):
         db_note = models.NoteModel(
             title=note.title,
             content=note.content,
