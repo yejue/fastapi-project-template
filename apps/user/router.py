@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends
 from fastapi.exceptions import HTTPException
+from fastapi.security.oauth2 import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 
 from dependencies import get_db
@@ -14,9 +15,9 @@ async def user_register(user: schemas.UserCreateSchema, db: Session = Depends(ge
 
 
 @router.post("/login", summary="用户登录")
-async def user_login(user: schemas.UserLoginSchema, db: Session = Depends(get_db)):
+async def user_login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
     # 认证密码 获得 user
-    user = service.UserService.authenticate_user(db, user.account, user.password)
+    user = service.UserService.authenticate_user(db, form_data.username, form_data.password)
     if not user:
         raise HTTPException(status_code=401, detail="认证未通过，检查密码或账户")
 
