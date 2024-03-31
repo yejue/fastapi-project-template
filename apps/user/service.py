@@ -13,8 +13,6 @@ from utils import jwt
 
 from . import schemas, models, constants
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
-
 
 class UserService:
     """用户模型表操作类"""
@@ -74,7 +72,7 @@ class UserService:
         return token
 
     @staticmethod
-    def get_current_user(db: Session, token: str = Depends(oauth2_scheme)):
+    def get_current_user(db: Session, token: str):
         """获取当前用户"""
         secret_key = constants.SECRET_KEY
         try:
