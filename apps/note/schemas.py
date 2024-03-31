@@ -14,6 +14,6 @@ class NoteSchema(NoteBaseSchema):
     user_id: int = Field(description="用户ID")
 
 
-class NodeCreateSchema(NoteBaseSchema):
+class NoteCreateSchema(NoteBaseSchema):
     """笔记创建 Schema"""
     pass
