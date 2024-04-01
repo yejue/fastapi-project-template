@@ -17,3 +17,11 @@ class NoteSchema(NoteBaseSchema):
 class NoteCreateSchema(NoteBaseSchema):
     """笔记创建 Schema"""
     pass
+
+
+class NoteUpdateSchema(NoteBaseSchema):
+    """笔记更新 Schema"""
+    title: str = Field(None, description="标题")
+    content: str = Field(None, description="笔记内容")
+    is_public: bool = Field(None, description="是否公开")
+    user_id: int = Field(None, description="用户ID")
