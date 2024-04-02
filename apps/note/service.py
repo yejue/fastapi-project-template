@@ -28,7 +28,7 @@ class NoteService:
 
     @staticmethod
     def partial_update_note(db: Session, db_note: models.NoteModel, note: schemas.NoteUpdateSchema):
-        """完全更新"""
+        """部分更新"""
         if note.title is not None:
             db_note.title = note.title
         if note.content is not None:
