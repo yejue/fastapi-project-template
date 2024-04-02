@@ -24,6 +24,20 @@ def decrypt_access_token(token: str, secret_key: str, algorithms=("HS256",)):
     return payload
 
 
+def is_access_token_valid(expire_time_stamp):
+    """检查访问令牌是否有效"""
+    # 将时间戳转换为 UTC 时区的日期时间对象
+    expire_utc_datetime = datetime.utcfromtimestamp(expire_time_stamp).replace(tzinfo=timezone.utc)
+
+    # 获取当前时间，确保带有时区信息
+    now = datetime.now(timezone.utc)
+
+    # 检查访问令牌是否过期
+    if expire_utc_datetime < now:
+        return False
+    return True
+
+
 if __name__ == '__main__':
     temp_data = {"user_id": "1"}
     key = "123dc95d0fdccadae1369029a393d7dfe30d4f0bfa304e8010bd777938bc1808"

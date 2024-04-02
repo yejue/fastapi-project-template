@@ -6,6 +6,7 @@ from sqlalchemy import select
 from dependencies import get_db
 from apps.user.dependencies import get_current_user
 from apps.user.models import UserModel
+from apps.permissions.dependencies import permission_classes, IsAuthenticated
 from . import models, schemas, service
 
 router = APIRouter()
@@ -37,12 +38,12 @@ async def create_note(
 # ):
 #     db_note = service.NoteService.get_note_by_id(db, note_id)
 
-
 @router.patch("/notes/{note_id}", summary="部分笔记更新")
+@permission_classes([IsAuthenticated])
 async def partial_update_note(
         note_id: int,
         note: schemas.NoteUpdateSchema,
-        db: Session = Depends(get_db)
+        db: Session = Depends(get_db),
 ):
     db_note = service.NoteService.get_note_by_id(db, note_id)
     return service.NoteService.partial_update_note(db, db_note, note)

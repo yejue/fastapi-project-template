@@ -19,6 +19,11 @@ def get_current_user(db: Session = Depends(get_db), token: str = Depends(oauth2_
     except JWTError:
         raise HTTPException(status_code=401, detail="Token 解密失败")
 
+    # 检验是否过期
+    if not jwt.is_access_token_valid(expire_time_stamp=payload.get("exp")):
+        raise HTTPException(status_code=401, detail="Token 已过期")
+
+    # 检验 Token 用户信息
     user_id = payload.get("user_id")
     if not user_id:
         raise HTTPException(status_code=401, detail="无效 Token")
