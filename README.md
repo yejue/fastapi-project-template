@@ -33,3 +33,9 @@
 │ requirements.txt
 ```
 
+
+## 二、TODOs
+- [ ] db 提交整合
+- [ ] 请求响应格式整合
+- [ ] 简单 ORBC
+- [ ] 精简 Schema
