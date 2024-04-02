@@ -12,7 +12,6 @@ BaseModel.metadata.create_all(bind=engine)
 
 
 app = FastAPI()
-# app.include_router(hello_router, prefix="/hello")
 app.include_router(user_router, prefix="/user")
 app.include_router(note_router, prefix="/note")
 
