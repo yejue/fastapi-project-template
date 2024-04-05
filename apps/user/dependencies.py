@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from jose.jwt import JWTError
 
 from utils import jwt
-from dependencies import get_db
+from database import get_db
 from apps.user import constants as user_constant
 from apps.user import service as user_service
 

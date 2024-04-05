@@ -3,7 +3,7 @@ from fastapi.exceptions import HTTPException
 from fastapi.security.oauth2 import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 
-from dependencies import get_db
+from database import get_db
 from . import schemas, service
 
 router = APIRouter()
