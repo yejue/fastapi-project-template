@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from apps.user.router import router as user_router
 from apps.note.router import router as note_router
 
-from middlewares.globals import global_exception_handler
+from middleware.globals import global_exception_handler
 
 
 app = FastAPI()
