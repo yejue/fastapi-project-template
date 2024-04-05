@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from apps.user.router import router as user_router
 from apps.note.router import router as note_router
 
-from exceptions import global_exception_handler
+from middlewares.globals import global_exception_handler
 from database import BaseModel, engine
 
 BaseModel.metadata.create_all(bind=engine)
