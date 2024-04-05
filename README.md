@@ -1,9 +1,9 @@
 ## Introduction
 
-U-Ping 是一个笔记分享和供你评论的 Web 服务，目前它仅仅是用于 FastAPI 的项目结构展示。U-Ping 取自 ”you“ 和“评”。
+U-Ping 是一个笔记分享和供你评论的 Web 服务，目前它仅仅是用于 FastAPI 的项目结构展示。
 这个项目结构基本参照了这个项目 [fastapi-best-practices](https://github.com/zhanymkanov/fastapi-best-practices)，之所以做这些改动是源于我在 Django 中的文件目录习惯。
 
-目前这个项目目前是有极大局限的，因为本人目前还不怎么熟悉 FastAPI 全部的组件以及像是 Alembic 的使用和 Sqlalchemy 2.0 的查询以及异步这些等等事项......
+这个项目目前是有极大局限的，因为本人还不怎么熟悉 FastAPI 全部的组件以及像是 Alembic 的使用和 Sqlalchemy 2.0 的查询以及异步这些等等事项......
 
 ## Project Structure
 
