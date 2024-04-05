@@ -1,5 +1,4 @@
-from sqlalchemy import Column, DateTime
-from sqlalchemy.sql import func
+from sqlalchemy import Column, DateTime, func
 
 from database import BaseModel
 

@@ -1,6 +1,6 @@
 from sqlalchemy import Column, String, Text, ForeignKey, Integer, Boolean
 from sqlalchemy.orm import relationship
-from models import BaseModelWithDatetime
+from utils.models import BaseModelWithDatetime
 
 
 class NoteModel(BaseModelWithDatetime):
