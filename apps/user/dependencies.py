@@ -4,8 +4,8 @@ from sqlalchemy.orm import Session
 from jose.jwt import JWTError
 
 from utils import jwt
+from config import settings
 from database import get_db
-from apps.user import constants as user_constant
 from apps.user import service as user_service
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/user/login")
@@ -13,7 +13,7 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/user/login")
 
 def get_current_user(db: Session = Depends(get_db), token: str = Depends(oauth2_scheme)):
     """获取当前用户"""
-    secret_key = user_constant.SECRET_KEY
+    secret_key = settings.SECRET_KEY
     try:
         payload = jwt.decrypt_access_token(token, secret_key)
     except JWTError:

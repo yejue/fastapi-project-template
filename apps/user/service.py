@@ -1,17 +1,15 @@
-from fastapi import Depends
 from fastapi.exceptions import HTTPException
-from fastapi.security.oauth2 import OAuth2PasswordBearer
 
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
-
 from jose.jwt import JWTError
 
-from utils.encrypt import get_password_hash, verify_password
 from utils import jwt
+from config import settings
+from utils.encrypt import get_password_hash, verify_password
 
-from . import schemas, models, constants
+from . import schemas, models
 
 
 class UserService:
@@ -66,15 +64,15 @@ class UserService:
     @staticmethod
     def create_token(data: dict):
         """创建认证 token"""
-        secret_key = constants.SECRET_KEY
-        exp_seconds = constants.ACCESS_TOKEN_EXPIRE_SECONDS
+        secret_key = settings.SECRET_KEY
+        exp_seconds = settings.ACCESS_TOKEN_EXPIRE_SECONDS
         token = jwt.create_access_token(data, secret_key, exp_seconds)
         return token
 
     @staticmethod
     def get_current_user(db: Session, token: str):
         """获取当前用户"""
-        secret_key = constants.SECRET_KEY
+        secret_key = settings.SECRET_KEY
         try:
             payload = jwt.decrypt_access_token(token, secret_key)
         except JWTError:
