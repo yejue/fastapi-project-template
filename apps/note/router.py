@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Request
 
 from sqlalchemy.orm import Session
 from sqlalchemy import select
@@ -21,30 +21,30 @@ async def get_notes(db: Session = Depends(get_db)):
     return res
 
 
-@router.post("/notes", summary="创建笔记")
+@router.post("/notes",
+             summary="创建笔记",
+             dependencies=[Depends(PermissionChecker([IsActiveUser]))])
 async def create_note(
+        request: Request,
         note: schemas.NoteCreateSchema,
         db: Session = Depends(get_db),
-        current_user: UserModel = Depends(get_current_user)
 ):
-    user_id = current_user.id
-    print(user_id)
+    user_id = request.user.id
     return service.NoteService.create_note(db=db, note=note, user_id=user_id)
 
 
 @router.patch(
     "/notes/{note_id}",
     summary="部分笔记更新",
-    dependencies=[Depends(PermissionChecker([IsActiveUser]))]
-)
+    dependencies=[Depends(PermissionChecker([IsActiveUser]))])
 async def partial_update_note(
+        request: Request,
         note_id: int,
         note: schemas.NoteUpdateSchema,
         db: Session = Depends(get_db),
-        user: UserModel = Depends(get_current_user)
 ):
     db_note = service.NoteService.get_note_by_id(db, note_id)
 
     # 对象权限校验
-    PermissionChecker.check_object_permission(permissions.IsNoteOwner, db_note.id, user, db)
+    PermissionChecker.check_object_permission(permissions.IsNoteOwner, db_note.id, request.user, db)
     return service.NoteService.partial_update_note(db, db_note, note)

@@ -5,11 +5,15 @@ from apps.user.router import router as user_router
 from apps.note.router import router as note_router
 
 from middleware.globals import global_exception_handler
+from middleware.jwt_auth_middleware import AuthMiddleware
 
 
 app = FastAPI()
 app.include_router(user_router, prefix="/user")
 app.include_router(note_router, prefix="/note")
+
+# 注册中间件
+app.add_middleware(AuthMiddleware)
 
 # 注册错误捕获
 app.add_exception_handler(Exception, global_exception_handler)
