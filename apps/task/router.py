@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from . import service
+from . import service, schemas
 from apps.task.celery_task.examples import task_add_two_num
 
 
@@ -21,6 +21,6 @@ async def get_task_detail(task_id: str):
 
 
 @router.post("/add-two-num", summary="两数相加")
-async def add_two_num(num1: int, num2: int):
-    task = task_add_two_num.delay(num1, num2)
+async def add_two_num(nums: schemas.AddTwoNumSchema):
+    task = task_add_two_num.delay(nums.num1, nums.num2)
     return {"task_id": task.id}
