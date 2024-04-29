@@ -15,6 +15,15 @@ U-Ping 是一个笔记分享和供你评论的 Web 服务，目前它仅仅是�
 这个项目一直会在保持简单清晰的前提下进行更新扩展。
 
 
+## 🐣Introduction-EN
+
+U-Ping is a web service for sharing and commenting on notes. Currently, it serves as a showcase of project structure for FastAPI. The project structure is primarily based on [fastapi-best-practices](https://github.com/zhanymkanov/fastapi-best-practices), with adjustments made to align with my preferred directory structure from working with Django.
+
+Technologies utilized include Alembic, SQLAlchemy, Celery, among others. 
+
+The project will continuously evolve and expand while adhering to the principles of simplicity and clarity.
+
+
 ## ✨Features
 
  - 简单清晰的 FastAPI 项目结构
